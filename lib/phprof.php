@@ -5,24 +5,12 @@
 
 class phprof
 {
-    private static $_cfg = array(
-        'xdebug_path' => '/tmp/phprof',
-        'xdebug_name' => '*.xdebug',
-        'xhprof_path' => '/tmp/phprof',
-        'xhprof_name' => '*.xhprof',
-    );
-
     private static $_sql;
     private static $_xdebug_tree;
     private static $_xhprof_tree;
 
     /**
-    */
-    static function config($k)
-    {
-        return self::$_cfg[$k];
-    }
-    /**
+        
     */
     static function dump()
     {
@@ -54,9 +42,13 @@ class phprof
         if (!is_dir($path)) {
             return $file_list;
         }
+        // File Name Pattern
+        $name = ini_get('xdebug.profiler_output_name');
+        $name = '/^'.preg_replace('/(%[^%])+/', '.+', $name_re).'$/';
+
         $list = scandir($path);
         foreach ($list as $file) {
-            if (preg_match('/(.+)\.xdebug$/',$file,$m)) {
+            if (preg_match($name,$file,$m)) {
                 $file_list[$m[1]]['xdebug'] = sprintf('%s/%s',$path,$file);
             }
         }
@@ -66,6 +58,10 @@ class phprof
         if (!is_dir($path)) {
             return $file_list;
         }
+        // File Name Pattern
+        $name = ini_get('xhprof.output_name');
+        $name = '/^'.preg_replace('/(%[^%])+/', '.+', $name_re).'$/';
+
         $list = scandir($path);
         foreach ($list as $file) {
             if (preg_match('/(.+)\.xhprof$/',$file,$m)) {

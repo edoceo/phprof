@@ -36,7 +36,7 @@ echo <<<EOH
 <link href="css/base.css" rel="stylesheet" type="text/css">
 <meta charset="utf-8">
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
-<script src="//gcdn.org/jquery/1.8.3/jquery.js" type="text/javascript"></script>
+<script src="//gcdn.org/jquery/1.9.1/jquery.js" type="text/javascript"></script>
 </head>
 <body>
 <header>
@@ -46,10 +46,9 @@ EOH;
 $list = array();
 $list[''] = 'PHProf';
 // $list['xdebug'] = 'xdebug';
-// $list['xhprof'] = 'xhprof';
-// $list['webgrind'] = 'webgrind';
-// $list['xhprof'] = 'xhprof';
-$list['config'] = 'config';
+$list['xhprof'] = 'xhprof';
+$list['webgrind'] = 'WebGrind';
+$list['config'] = 'Config';
 
 foreach ($list as $k=>$v) {
     echo '<li>';
@@ -70,19 +69,30 @@ echo '</header>';
 echo '<section>';
 
 switch ($_GET['a']) {
+case 'xdebug':
+    echo '<h2>No Special Page Yet</h2>';
+    break;
+case 'xhprof':
+    header(sprintf('Location: http://%s/xhprof',$_SERVER['SERVER_NAME']));
+    die("xhprof");
+    break;
+case 'webgrind':
+    header(sprintf('Location: http://%s/webgrind',$_SERVER['SERVER_NAME']));
+    die("webgrind");
+    break;
 case 'config':
 
     include(APP_ROOT . '/view/config.php');
 
     // echo dump($_SERVER);
-    ob_start();
-    phpinfo();
-    $html = ob_get_clean();
-    if (preg_match('/<body>(.+)<\/body>/ms',$html,$m)) {
-        $html = $m[1];
-    }
-    echo $html;
-    
+    // ob_start();
+    // phpinfo();
+    // $html = ob_get_clean();
+    // if (preg_match('/<body>(.+)<\/body>/ms',$html,$m)) {
+    //     $html = $m[1];
+    // }
+    // echo $html;
+
     // Show Config
     break;
 default:

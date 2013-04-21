@@ -61,11 +61,12 @@ $want_list = array(
     'xdebug.profiler_enable_trigger' => '1',
     'xdebug.profiler_append' => '0',
     'xdebug.profiler_output_dir' => '/tmp/phprof',
-    'xdebug.profiler_output_name' => 'xdebug.%S.',
+    'xdebug.profiler_output_name' => 'xdebug.%u.out',
     'xdebug.trace_output_dir' =>  '/tmp/phprof',
-    'xdebug.trace_output_name' => 'xtrace.%u',
+    'xdebug.trace_output_name' => 'xtrace.%u.trace',
 
-    'xhprof.output_dir' => '/tmp/phprof',
+    'xhprof.output_dir'  => '/tmp/phprof',
+    'xhprof.output_name' => 'xhprof.%u.out',
 );
 
 
