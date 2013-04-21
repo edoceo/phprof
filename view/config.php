@@ -54,7 +54,7 @@ xdebug.var_display_max_depth	3	3
 
 $want_list = array(
     'auto_prepend_file' => APP_ROOT . '/lib/auto-alpha.php',
-    'auto_apppend_file' => APP_ROOT . '/lib/auto-omega.php',
+    'auto_append_file' => APP_ROOT . '/lib/auto-omega.php',
     'xdebug.default_enable' => '1',
     'xdebug.profiler_enable' => '1',
     // When this setting is set to 1, you can trigger the generation of profiler files by using the XDEBUG_PROFILE GET/POST parameter, or set a cookie with the name XDEBUG_PROFILE. This will then write the profiler data to defined directory. In order to prevent the profiler to generate profile files for each request, you need to set xdebug.profiler_enable to 0.
