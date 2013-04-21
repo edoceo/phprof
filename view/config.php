@@ -1,7 +1,9 @@
 <?php
+/**
+    Show the Configuration
+*/
 
 // echo dump($file_list);
-
 
 /*
 xdebug.auto_trace	Off	Off
@@ -51,23 +53,22 @@ xdebug.var_display_max_depth	3	3
 */
 
 $want_list = array(
-    'auto_prepend_file' => APP_ROOT . '/lib/prepend.php',
-    'auto_apppend_file' => APP_ROOT . '/lib/append.php',
+    'auto_prepend_file' => APP_ROOT . '/lib/auto-alpha.php',
+    'auto_apppend_file' => APP_ROOT . '/lib/auto-omega.php',
     'xdebug.default_enable' => '1',
     'xdebug.profiler_enable' => '1',
     // When this setting is set to 1, you can trigger the generation of profiler files by using the XDEBUG_PROFILE GET/POST parameter, or set a cookie with the name XDEBUG_PROFILE. This will then write the profiler data to defined directory. In order to prevent the profiler to generate profile files for each request, you need to set xdebug.profiler_enable to 0.
     'xdebug.profiler_enable_trigger' => '1',
     'xdebug.profiler_append' => '0',
     'xdebug.profiler_output_dir' => '/tmp/phprof',
-    'xdebug.profiler_output_name' => '%U.xdebug',
+    'xdebug.profiler_output_name' => 'xdebug.%S.',
     'xdebug.trace_output_dir' =>  '/tmp/phprof',
-    'xdebug.trace_output_name' => '%U.xtrace',
-    
+    'xdebug.trace_output_name' => 'xtrace.%u',
+
     'xhprof.output_dir' => '/tmp/phprof',
 );
 
 
-echo '<a href="http://xdebug.org/docs/all_settings">http://xdebug.org/docs/all_settings</a>';
 echo '<table border="1">';
 echo '<th>Setting</th><th>Reccomended</th><th>You</th>';
 
@@ -83,6 +84,8 @@ foreach ($want_list as $name => $want) {
 }
 
 echo '</table>';
+
+echo '<p>See <a href="http://xdebug.org/docs/all_settings">xdebug.org/docs/all_settings</a> for more details</p>';
 
 // echo '<pre>';
 // print_r(phprof::dump());
