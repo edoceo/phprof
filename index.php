@@ -107,7 +107,8 @@ default:
 echo '</section>';
 
 // Footer
-echo '<footer><address>';
+echo '<footer>';
+echo '<a href="http://radix.edoceo.com/performance">PHProf</a> | ';
 // Log Time, Memory, Query Count
 if (!empty($_t0)) {
 
@@ -124,7 +125,7 @@ if (!empty($_t0)) {
 
     echo implode(' | ',$set);
 }
-echo '</address></footer>';
+echo '</footer>';
 
 echo '</body>';
 echo '</html>';

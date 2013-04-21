@@ -87,6 +87,11 @@ foreach ($want_list as $name => $want) {
 echo '</table>';
 
 echo '<p>See <a href="http://xdebug.org/docs/all_settings">xdebug.org/docs/all_settings</a> for more details</p>';
+echo '<p>To Install WebGrind Use</p>';
+echo '<pre>git clone git://github.com/jokkedk/webgrind.git ' . $_SERVER['DOCUMENT_ROOT'] . '/webgrind</pre>';
+
+echo '<p>To Install Xhprof use</p>';
+echo '<pre>git clone git://github.com/facebook/xhprof.git ' . $_SERVER['DOCUMENT_ROOT'] . '/xhprof</pre>';
 
 // echo '<pre>';
 // print_r(phprof::dump());

@@ -1,5 +1,18 @@
 /* General Style Info */
 
+footer {
+    background-color: #000;
+    bottom: 0px;
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 700;
+    opacity: 0.6;
+    padding: 8px;
+    position: fixed;
+    text-align: center;
+}
+
+
 span.s { font-size:80%; }
 /* Layout */
 #head { background:#333; height:64px; width:100%; }
@@ -15,7 +28,6 @@ span.s { font-size:80%; }
 	padding:8px;
 }
 #main { margin: 0px 8px; }
-#foot { clear: both; margin: 8px; }
 
 #root-hint { background:#efefef; bottom:18px; color:#f00; font-size:22px; left:36px; opacity:0.8; position:fixed; }
 
