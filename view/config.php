@@ -92,6 +92,7 @@ echo '<pre>git clone git://github.com/jokkedk/webgrind.git ' . $_SERVER['DOCUMEN
 
 echo '<p>To Install Xhprof use</p>';
 echo '<pre>git clone git://github.com/facebook/xhprof.git ' . $_SERVER['DOCUMENT_ROOT'] . '/xhprof</pre>';
+// ln -s /opt/xhprof/xhprof_html/ ./xhprof
 
 // echo '<pre>';
 // print_r(phprof::dump());

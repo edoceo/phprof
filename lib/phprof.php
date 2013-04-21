@@ -60,7 +60,7 @@ class phprof
         }
         // File Name Pattern
         $name = ini_get('xhprof.output_name');
-        $name = '/^'.preg_replace('/(%[^%])+/', '.+', $name_re).'$/';
+        $name = '/^'.preg_replace('/(%[^%])+/', '(.+)', $name).'$/';
 
         $list = scandir($path);
         foreach ($list as $file) {
