@@ -3,8 +3,6 @@
     Show the Configuration
 */
 
-// echo dump($file_list);
-
 /*
 xdebug.auto_trace	Off	Off
 xdebug.collect_includes	On	On
@@ -55,18 +53,19 @@ xdebug.var_display_max_depth	3	3
 $want_list = array(
     'auto_prepend_file' => APP_ROOT . '/lib/auto-alpha.php',
     'auto_append_file' => APP_ROOT . '/lib/auto-omega.php',
-    'xdebug.default_enable' => '1',
-    'xdebug.profiler_enable' => '1',
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#default_enable">default_enable</a>' => '1',
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#profiler_enable">profiler_enable</a>' => '0',
     // When this setting is set to 1, you can trigger the generation of profiler files by using the XDEBUG_PROFILE GET/POST parameter, or set a cookie with the name XDEBUG_PROFILE. This will then write the profiler data to defined directory. In order to prevent the profiler to generate profile files for each request, you need to set xdebug.profiler_enable to 0.
-    'xdebug.profiler_enable_trigger' => '1',
-    'xdebug.profiler_append' => '0',
-    'xdebug.profiler_output_dir' => '/tmp/phprof',
-    'xdebug.profiler_output_name' => 'xdebug.%u.out',
-    'xdebug.trace_output_dir' =>  '/tmp/phprof',
-    'xdebug.trace_output_name' => 'xtrace.%u.trace',
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#profiler_enable_trigger">profiler_enable_trigger</a>' => '1',
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#profiler_append">profiler_append</a>' => '0',
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#profiler_output_dir">profiler_output_dir</a>' => '/tmp/phprof',
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#profiler_output_name">profiler_output_name</a>' => 'xdebug.%R.out',
+
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#trace_output_dir">trace_output_dir</a>' =>  '/tmp/phprof',
+    'xdebug.<a href="http://xdebug.org/docs/all_settings#trace_output_name">trace_output_name</a>' => 'xtrace.%R.out',
 
     'xhprof.output_dir'  => '/tmp/phprof',
-    'xhprof.output_name' => 'xhprof.%u.out',
+    'xhprof.output_name' => 'xhprof.%R.out',
 );
 
 
@@ -76,7 +75,8 @@ echo '<th>Setting</th><th>Reccomended</th><th>You</th>';
 foreach ($want_list as $name => $want) {
 
     // $want = '/tmp/phprof';
-    $have = ini_get($name);
+    $have = ini_get(strip_tags($name));
+
     echo '<tr>';
     echo '<td>' . $name . '</td>';
     echo '<td>' . $want . '</td>';
@@ -92,8 +92,4 @@ echo '<pre>git clone git://github.com/jokkedk/webgrind.git ' . $_SERVER['DOCUMEN
 
 echo '<p>To Install Xhprof use</p>';
 echo '<pre>git clone git://github.com/facebook/xhprof.git ' . $_SERVER['DOCUMENT_ROOT'] . '/xhprof</pre>';
-// ln -s /opt/xhprof/xhprof_html/ ./xhprof
 
-// echo '<pre>';
-// print_r(phprof::dump());
-// echo '</pre>';
