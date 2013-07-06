@@ -4,12 +4,7 @@
     @brief Auto Prepend Script
 */
 
-$x = false;
-if (!empty($_GET['XDEBUG_PROFILE']))    $x = true;
-if (!empty($_POST['XDEBUG_PROFILE']))   $x = true;
-if (!empty($_COOKIE['XDEBUG_PROFILE'])) $x = true;
-if ($x) header('X-Profiler-xdebug: enabled');
-
+// xhprof
 $x = false;
 if (!empty($_GET['XHPROF_PROFILE']))    $x = true;
 if (!empty($_POST['XHPROF_PROFILE']))   $x = true;
@@ -18,11 +13,18 @@ if ($x) {
     if (function_exists('xhprof_enable')) {
         // Base Datas
         // XHPROF_FLAGS_CPU + XHPROF_FLAGS_MEMORY
-        header('X-Profiler-xhprof: enabled');
         xhprof_enable(XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY); // | XHPROF_FLAGS_NO_BUILTINS);
+        header('X-Profiler-xhprof: enabled');
         register_shutdown_function('xhprof_save');
     }
 }
+
+// xdebug
+$x = false;
+if (!empty($_GET['XDEBUG_PROFILE']))    $x = true;
+if (!empty($_POST['XDEBUG_PROFILE']))   $x = true;
+if (!empty($_COOKIE['XDEBUG_PROFILE'])) $x = true;
+if ($x) header('X-Profiler-xdebug: enabled');
 
 /**
     Define the Save Handler
@@ -53,8 +55,8 @@ function xhprof_save($data=null,$name=null)
     // $file = sprintf('%s/xhprof.%R.',$path,$name);
     // @see http://xdebug.org/docs/all#trace_output_name for mapping
 
-    $file = ini_get('xhprof.output_name'); // 'xhprof.%R';
-    $file = ( $file ? $file : '%u.xhprof' );
+    $file = ini_get('xhprof.output_name'); //  // not in the INI file
+    $file = ( $file ? $file : 'xhprof.%R.out' );
     $file = str_replace('%p',posix_getpid(),$file);
     $file = str_replace('%r',sprintf('%08x',mt_rand(0x00001000,mt_getrandmax())),$file);
     $file = str_replace('%t',$_SERVER['REQUEST_TIME'],$file);
