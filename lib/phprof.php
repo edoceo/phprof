@@ -7,15 +7,9 @@ class phprof
 {
     private static $_sql;
     private static $_xdebug_tree;
+    private static $_xdebug_stat;
     private static $_xhprof_tree;
 
-    /**
-        
-    */
-    static function dump()
-    {
-        return self::$_cfg;
-    }
     static function stat()
     {
         $stat = array();
@@ -30,6 +24,7 @@ class phprof
 
         return $stat;
     }
+
     /**
         List of Executed Scripts
     */
@@ -42,13 +37,15 @@ class phprof
         if (!is_dir($path)) {
             return $file_list;
         }
+
         // File Name Pattern
         $name = ini_get('xdebug.profiler_output_name');
-        $name = '/^'.preg_replace('/(%[^%])+/', '.+', $name_re).'$/';
+        $name = '/^'.preg_replace('/(%[^%])+/', '(.+)', $name).'$/';
 
         $list = scandir($path);
         foreach ($list as $file) {
             if (preg_match($name,$file,$m)) {
+                $file_list[$m[1]]['time'] = filemtime(sprintf('%s/%s',$path,$file));
                 $file_list[$m[1]]['xdebug'] = sprintf('%s/%s',$path,$file);
             }
         }
@@ -58,13 +55,16 @@ class phprof
         if (!is_dir($path)) {
             return $file_list;
         }
+
         // File Name Pattern
         $name = ini_get('xhprof.output_name');
+        $name = ( $name ? $name : 'xhprof.%R.out' );
         $name = '/^'.preg_replace('/(%[^%])+/', '(.+)', $name).'$/';
 
         $list = scandir($path);
         foreach ($list as $file) {
-            if (preg_match('/(.+)\.xhprof$/',$file,$m)) {
+            if (preg_match($name,$file,$m)) {
+                $file_list[$m[1]]['time'] = filemtime(sprintf('%s/%s',$path,$file));
                 $file_list[$m[1]]['xhprof'] = sprintf('%s/%s',$path,$file);
             }
         }
@@ -87,16 +87,19 @@ class phprof
         ksort($file_list);
         return $file_list;
     }
-    /**
-    */
-    static function load($uid)
-    {
-        $sqlite_file = sprintf('%s/%s.sqlite',ini_get('xhprof.output_dir'),$uid);
-        $xdebug_file = sprintf('%s/%s.xdebug',ini_get('xdebug.profiler_output_dir'),$uid);
-        $xhprof_file = sprintf('%s/%s.xhprof',ini_get('xhprof.output_dir'),$uid);
 
+    /**
+
+    */
+    static function load($f)
+    {
+        $xdebug_file = $f['xdebug']; // sprintf('%s/%s.xdebug',ini_get('xdebug.profiler_output_dir'),$uid);
+        $xhprof_file = $f['xhprof']; // sprintf('%s/%s.xhprof',ini_get('xhprof.output_dir'),$uid);
+
+        // Caching in SQLite?
+        $sqlite_file = sprintf('%s/%s.sqlite',ini_get('xhprof.output_dir'),$uid);
         if (is_file($sqlite_file)) {
-            return;
+            return true;
         }
 
         // self::$_sql = sqlite_open($sqlite_file,0666,$esz);
@@ -106,15 +109,18 @@ class phprof
         // sqlite_exec($sql,self::$_sql);
 
         self::$_xdebug_tree = xdebug::tree($xdebug_file);
+        self::$_xdebug_stat = xdebug::stat();
+
         self::$_xhprof_tree = xhprof::tree($xhprof_file);
 
         // Loop Each, Merging to Master Function Tree
         // echo dump(array_keys(self::$_xdebug_tree));
         // echo dump(array_keys(self::$_xhprof_tree));
 
-        return true;
+        return self::tree();
 
     }
+
     /**
     */
     /**
@@ -123,6 +129,7 @@ class phprof
     {
 
         $tree = array();
+        $tree['{main}'] = array();
 
         // Spin xdebug
         $i = 0;
@@ -157,6 +164,14 @@ class phprof
         }
 
         return $tree;
+    }
+    
+    /**
+    
+    */
+    static function tree_stat()
+    {
+        return self::$_xdebug_stat;
     }
 
 }
