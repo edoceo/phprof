@@ -1,5 +1,13 @@
 /* General Style Info */
 
+header {
+    background:#666;
+    border-bottom:2px solid #ff9700;
+    display:block;
+    height:30px;
+    vertical-align:middle;
+}
+
 footer {
     background-color: #000;
     bottom: 0px;
@@ -16,9 +24,26 @@ footer {
 span.s { font-size:80%; }
 /* Layout */
 #head { background:#333; height:64px; width:100%; }
-#menu { background:#666; border-bottom:2px solid #ff9700; display:block; height:30px; list-style-type:none; margin:0px; min-width:620px; padding:0px; vertical-align:middle; }
-#menu li { float:left; height:30px; margin:0px; padding:0px; text-align:center; width:120px; }
-#menu li a { display:block; height:30px; line-height:30px; text-align:center; width:120px; }
+#menu {
+    font-size:24px;
+    font-weight:700;
+    letter-spacing:2px;
+    list-style-type:none;
+    margin:0px;
+    min-width:620px;
+    padding:0px;
+}
+#menu li {
+    float:left;
+    margin:0px;
+    padding:0px;
+    text-align:center;
+}
+#menu li a {
+    display:block; height:30px; line-height:30px;
+    padding:2px 12px;
+    text-align:center;
+}
 #menu li a:hover, #menu li a.h { background:#ff9700; color:#000; }
 #wrap { background: #eee; margin: 0px; text-align:left; width:740px; }
 #core{
@@ -45,6 +70,7 @@ div.signin-t p { font-size:14px; }
 .center table { margin-left: auto; margin-right: auto; text-align: left;}
 .center th { text-align: center !important; }
 td, th { border: 1px solid #000000; font-size: 75%; vertical-align: baseline;}
+td.r { text-align:right; }
 .p {text-align: left;}
 .e {background-color: #ccccff; font-weight: bold; color: #000000;}
 .h {background-color: #9999cc; font-weight: bold; color: #000000;}
