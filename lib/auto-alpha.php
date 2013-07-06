@@ -61,7 +61,7 @@ function xhprof_save($data=null,$name=null)
     $file = str_replace('%r',sprintf('%08x',mt_rand(0x00001000,mt_getrandmax())),$file);
     $file = str_replace('%t',$_SERVER['REQUEST_TIME'],$file);
     $file = str_replace('%u',str_replace('.','_',microtime(true)),$file);
-    $file = str_replace('%R',strtolower(str_replace(array('/','.','?'),'_',$_SERVER['REQUEST_URI'])),$file);
+    $file = str_replace('%R',str_replace(array('/','.','?'),'_',$_SERVER['REQUEST_URI']),$file);
     $file = str_replace('%S',session_id(),$file);
     $file = sprintf('%s/%s',$path,$file);
 
