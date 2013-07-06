@@ -47,6 +47,7 @@ echo <<<EOH
 <meta http-equiv="content-type" content="text/html;charset=utf-8" />
 <script src="//gcdn.org/jquery/1.9.1/jquery.js" type="text/javascript"></script>
 <script src="phprof.js" type="text/javascript"></script>
+<script src="jquery.tablesorter.js" type="text/javascript"></script>
 </head>
 <body>
 <header>
@@ -140,6 +141,7 @@ $(document).ready(function() {
     });
 
     $('#phprof-view').on('click',function() {
+        $('#xhprof-view').html('<h2>Loading...</h2>');
         phprof.page_view($('#phprof-list').val());
     });
 
