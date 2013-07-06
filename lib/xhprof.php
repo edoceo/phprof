@@ -53,20 +53,20 @@ class xhprof
             // $func_tree[$func]['imu'] += $prof['mu'];
             // $func_tree[$func]['imp'] += $prof['pmu'];
             $func_tree[$func]['xct'] += $prof['ct'];
-            $func_tree[$func]['xwt'] += $prof['wt'];
-            $func_tree[$func]['xmu'] += $prof['mu'];
-            $func_tree[$func]['xmp'] += $prof['pmu'];
+            $func_tree[$func]['iwt'] += $prof['wt'];
+            $func_tree[$func]['imu'] += $prof['mu'];
+            $func_tree[$func]['imp'] += $prof['pmu'];
             $func_tree[$func]['icpu'] += $prof['cpu'];
 
             if (!empty($from)) {
                 if (empty($func_tree[$from])) {
                     self::$_stat['ufc']++;
                 }
-                $func_tree[$from]['ict'] += $prof['ct'];
-                $func_tree[$from]['iwt'] += $prof['wt'];
-                $func_tree[$from]['imu'] += $prof['mu'];
-                $func_tree[$from]['imp'] += $prof['pmu'];
-                $func_tree[$from]['icpu'] += $prof['cpu'];
+                // $func_tree[$from]['ict'] += $prof['ct'];
+                // $func_tree[$from]['iwt'] += $prof['wt'];
+                // $func_tree[$from]['imu'] += $prof['mu'];
+                // $func_tree[$from]['imp'] += $prof['pmu'];
+                // $func_tree[$from]['icpu'] += $prof['cpu'];
             }
 
             self::$_stat['tfc'] += $prof['ct']; // Total Function Count
@@ -76,7 +76,7 @@ class xhprof
 
             if (!empty($from)) {
                 echo "Func:$func; From: $from\n";
-                die(dump($prof));
+                die("xhprof#79: " . dump($prof));
                 // Add current $func metrics to parent $from
                 if (empty($func_tree[$from])) {
                     $func_tree[$from] = array(

@@ -7,7 +7,11 @@
 
 class xdebug
 {
-    private static $_stat;
+    private static $_stat = array(
+        'tfc' => 0, // Total Function Count
+        'ufc' => 0, // Unique Function Count
+        
+    );
 
     public static function stat()
     {
@@ -133,19 +137,6 @@ class xdebug
                 $fl = $fn = null;
                 $cfl = $cfn = null;
             }
-            //
-            //     die("Blank:");
-            //     // Reset
-            //     $xdebug_prof = array();
-            //     $xdebug_subf = null;
-            // }
-
-            // if (preg_match('/version: (.+)/',$line,$m)) {
-            //     self::$_stat['version'] = $m[1];
-            // }
-            // if (preg_match('/^cmd: (.+)/',$line,$m)) {
-            //     self::$_stat['file'] = $m[1];
-            // }
 
         }
 
