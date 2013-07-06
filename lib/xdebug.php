@@ -111,7 +111,7 @@ class xdebug
                 $cfn = str_replace('include_once::','load::',$cfn);
                 $cfn = str_replace('require_once::','load::',$cfn);
 
-                $xdebug_tree[$cfn]['xwt'] += $m[2];
+                // $xdebug_tree[$cfn]['iwt'] += $m[2];
                 continue;
             }
 
@@ -148,10 +148,12 @@ class xdebug
             // }
 
         }
-        
+
         return $xdebug_tree;
     }
+
     /**
+        fscanf Wrapper
     */
     private static function _fscanf($h,$f)
     {
