@@ -35,12 +35,9 @@ case 'load':
         echo '</option>';
     }
     break;
-    
+
 case 'view':
 
-    // $list = phprof::listProfileOutputs();
-    //$view = $list[ $_POST['x'] ];
-    // echo dump($view);
     include(APP_ROOT . '/view/view.php');
 
     break;
